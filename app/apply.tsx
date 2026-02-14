@@ -1,7 +1,7 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { useRouter } from "expo-router";
-import React, { useState } from "react";
+import React, { useState } from "react"; // ここが重要です
 import { Button, StyleSheet, TextInput } from "react-native";
 
 export default function ApplyScreen() {
@@ -10,15 +10,23 @@ export default function ApplyScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">申請フォーム</ThemedText>
+      <ThemedText type="title">申請 1/3</ThemedText>
+      <ThemedText style={{ marginTop: 10 }}>
+        研究室名を入力してください
+      </ThemedText>
       <TextInput
         style={styles.input}
-        placeholder="研究室名を入力"
+        placeholder="例: 宮田研究室"
         value={labName}
         onChangeText={setLabName}
       />
       {labName.length > 0 && (
-        <Button title="延長申請する" onPress={() => router.push("/congrats")} />
+        <Button
+          title="次へ"
+          onPress={() =>
+            router.push({ pathname: "/details", params: { labName } })
+          }
+        />
       )}
       <Button
         title="最初に戻る"
