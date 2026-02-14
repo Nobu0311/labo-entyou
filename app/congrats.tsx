@@ -1,25 +1,31 @@
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import { useRouter } from "expo-router";
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet } from "react-native";
 
 export default function CongratsScreen() {
   const router = useRouter();
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>🎉 おめでとう 🎉</Text>
-      <Button title="最初のページに戻る" onPress={() => router.push("/")} />
-    </View>
+    <ThemedView style={styles.container}>
+      <ThemedText type="title">申請が完了しました！</ThemedText>
+      <ThemedText style={styles.margin}>
+        お疲れ様です。研究頑張ってください。
+      </ThemedText>
+
+      {/* 最初に戻るボタン */}
+      <Button title="最初に戻る" onPress={() => router.replace("/")} />
+    </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
-  text: {
-    fontSize: 28,
-    marginBottom: 20,
+  margin: {
+    marginVertical: 20,
   },
 });
