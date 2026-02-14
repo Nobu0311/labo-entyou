@@ -1,28 +1,30 @@
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { useRouter } from "expo-router"; // 画面遷移用
-import React, { useState } from "react";
-import { Button, StyleSheet, TextInput } from "react-native";
+import { useRouter } from "expo-router";
+import { Button, StyleSheet, View } from "react-native";
 
-export default function HomeScreen() {
-  const [labName, setLabName] = useState("");
+export default function RoleSelectionScreen() {
   const router = useRouter();
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText type="title">延長申請</ThemedText>
+      <ThemedText type="title">研究室延長申請システム</ThemedText>
+      <ThemedText style={styles.subtitle}>
+        あなたの役割を選択してください
+      </ThemedText>
 
-      <TextInput
-        style={styles.input}
-        placeholder="研究室名を入力してください"
-        value={labName}
-        onChangeText={setLabName}
-      />
-
-      {/* 入力がある時だけボタンを表示 */}
-      {labName.length > 0 && (
-        <Button title="延長申請する" onPress={() => router.push("/congrats")} />
-      )}
+      <View style={styles.buttonContainer}>
+        <Button
+          title="申請者として進む"
+          onPress={() => router.push("/apply")}
+        />
+        <View style={{ height: 20 }} />
+        <Button
+          title="管理者としてログイン"
+          color="#f4511e"
+          onPress={() => router.push("/admin")}
+        />
+      </View>
     </ThemedView>
   );
 }
@@ -34,14 +36,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     padding: 20,
   },
-  input: {
-    height: 40,
-    width: "100%",
-    marginVertical: 20,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: "#fff",
-  },
+  subtitle: { marginVertical: 20, opacity: 0.7 },
+  buttonContainer: { width: "100%", marginTop: 20 },
 });
